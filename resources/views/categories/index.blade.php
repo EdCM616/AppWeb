@@ -39,7 +39,7 @@
                             <li class="nav-item">
                                 <a class="nav-link active" href="{!! url()->current() !!}"><i class="fa fa-list mr-2"></i>{{trans('lang.category_table')}}</a>
                             </li>
-                            <li class="nav-item">
+                            <li class="nav-item" >
                                 <a class="nav-link" href="{!! route('categories.create') !!}"><i
                                             class="fa fa-plus mr-2"></i>{{trans('lang.category_create')}}</a>
                             </li>
@@ -49,7 +49,7 @@
                     <div class="card-body">
 
                         <div id="data-table_processing" class="dataTables_processing panel panel-default"
-                             style="display: none;">Processing... Alan
+                             style="display: none;">Processing... IKAM User
                         </div>
 
                         <div class="table-responsive m-t-10">

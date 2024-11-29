@@ -10,7 +10,7 @@
         </span>
     </a>
 </div>
-<div class="navbar-collapse">
+<div class="navbar-collapse" style="background: #fa0000;">
     <ul class="navbar-nav mr-auto mt-md-0">
         <li class="nav-item"><a class="nav-link nav-toggler hidden-md-up text-muted waves-effect waves-dark"
                                 href="javascript:void(0)"><i class="mdi mdi-menu"></i></a></li>

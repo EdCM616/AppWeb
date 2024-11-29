@@ -3,7 +3,7 @@ $user = Auth::user();
 $role_has_permission = App\Models\Permission::where('role_id', $user->role_id)->pluck('permission')->toArray();
 @endphp
 
-<nav class="sidebar-nav">
+<nav class="sidebar-nav" style="background: #fa0000;">
 
     <ul id="sidebarnav">    
     <li>
