@@ -5,8 +5,8 @@ $role_has_permission = App\Models\Permission::where('role_id', $user->role_id)->
 
 <nav class="sidebar-nav" style="background: #fa0000;">
 
-    <ul id="sidebarnav">    
-    <li>
+    <ul id="sidebarnav">
+        <li>
             <a class="waves-effect waves-dark" href="{!! url('dashboard') !!}" aria-expanded="false">
 
                 <i class="mdi mdi-home"></i>
@@ -15,20 +15,45 @@ $role_has_permission = App\Models\Permission::where('role_id', $user->role_id)->
 
             </a>
         </li>
-    
-        {{--
-        @if(in_array('god-eye', $role_has_permission))
 
+        
+        @if(in_array('stores', $role_has_permission))
         <li>
-            <a class="waves-effect waves-dark" href="{!! url('map') !!}" aria-expanded="false">
+            <a class="waves-effect waves-dark" href="{!! url('stores') !!}" aria-expanded="false">
 
-                <i class="mdi mdi-home-map-marker"></i>
+                <i class="mdi mdi-shopping"></i>
 
-                <span class="hide-menu">{{trans('lang.god_eye')}}</span>
+                <span class="hide-menu">Pymes</span>
 
             </a>
         </li>
         @endif
+
+        @if(in_array('users', $role_has_permission))
+        <li>
+            <a class="waves-effect waves-dark" href="{!! url('users') !!}" aria-expanded="false">
+
+                <i class="mdi mdi-account-multiple"></i>
+
+                <span class="hide-menu">Usuarios</span>
+
+            </a>
+        </li>
+        @endif
+
+        @if(in_array('category', $role_has_permission))
+
+        <li><a class="waves-effect waves-dark" href="{!! url('categories') !!}" aria-expanded="false">
+
+                <i class="mdi mdi-clipboard-text"></i>
+
+                <span class="hide-menu">Categorias</span>
+
+            </a>
+        </li>        
+        @endif
+
+        {{--
 
         @if(in_array('zone', $role_has_permission))
         <li>
@@ -65,19 +90,6 @@ $role_has_permission = App\Models\Permission::where('role_id', $user->role_id)->
         @endif
 
 
-        @if(in_array('users', $role_has_permission))
-
-        <li>
-            <a class="waves-effect waves-dark" href="{!! url('users') !!}" aria-expanded="false">
-
-                <i class="mdi mdi-account-multiple"></i>
-
-                <span class="hide-menu">{{trans('lang.user_customer')}}</span>
-
-            </a>
-        </li>
-        @endif
-
 
         @if(in_array('vendors',$role_has_permission) || in_array('approve_vendors',$role_has_permission) ||
         in_array('pending_vendors',$role_has_permission))
@@ -95,26 +107,15 @@ $role_has_permission = App\Models\Permission::where('role_id', $user->role_id)->
                 <li class="all_driver_menu"><a href="{!! url('vendors') !!}">{{trans('lang.all_vendors')}}</a></li>
                 @endif
                 @if(in_array('approve_vendors',$role_has_permission))
-                <li class="approve_driver_menu"><a href="{!! url('vendors/approved') !!}">{{trans('lang.approved_vendors')}}</a></li>
+                <li class="approve_driver_menu"><a
+                        href="{!! url('vendors/approved') !!}">{{trans('lang.approved_vendors')}}</a></li>
                 @endif
                 @if(in_array('pending_vendors',$role_has_permission))
-                <li class="pending_driver_menu"><a href="{!! url('vendors/pending') !!}">{{trans('lang.approval_pending_vendors')}}</a></li>
+                <li class="pending_driver_menu"><a
+                        href="{!! url('vendors/pending') !!}">{{trans('lang.approval_pending_vendors')}}</a></li>
                 @endif
             </ul>
 
-        </li>
-        @endif
-
-
-        @if(in_array('stores', $role_has_permission))
-
-        <li><a class="waves-effect waves-dark" href="{!! url('stores') !!}" aria-expanded="false">
-
-                <i class="mdi mdi-shopping"></i>
-
-                <span class="hide-menu">{{trans('lang.store_plural')}}</span>
-
-            </a>
         </li>
         @endif
 
@@ -134,10 +135,12 @@ $role_has_permission = App\Models\Permission::where('role_id', $user->role_id)->
                 <li class="all_driver_menu"><a href="{!! url('drivers') !!}">{{trans('lang.all_drivers')}}</a></li>
                 @endif
                 @if(in_array('approve_drivers',$role_has_permission))
-                <li class="approve_driver_menu"><a href="{!! url('drivers/approved') !!}">{{trans('lang.approved_drivers')}}</a></li>
+                <li class="approve_driver_menu"><a
+                        href="{!! url('drivers/approved') !!}">{{trans('lang.approved_drivers')}}</a></li>
                 @endif
                 @if(in_array('pending_drivers',$role_has_permission))
-                <li class="pending_driver_menu"><a href="{!! url('drivers/pending') !!}">{{trans('lang.approval_pending_drivers')}}</a></li>
+                <li class="pending_driver_menu"><a
+                        href="{!! url('drivers/pending') !!}">{{trans('lang.approval_pending_drivers')}}</a></li>
                 @endif
             </ul>
 
@@ -164,20 +167,8 @@ $role_has_permission = App\Models\Permission::where('role_id', $user->role_id)->
 
         </li>
 
-        @endif
---}}
-        @if(in_array('category', $role_has_permission))
-
-        <li><a class="waves-effect waves-dark" href="{!! url('categories') !!}" aria-expanded="false">
-
-                <i class="mdi mdi-clipboard-text"></i>
-
-                <span class="hide-menu">Categorias</span>
-
-            </a>
-        </li>
-        @endif
-{{--
+        @endif       
+        
         @if(in_array('items', $role_has_permission))
 
         <li>
@@ -185,10 +176,11 @@ $role_has_permission = App\Models\Permission::where('role_id', $user->role_id)->
             <a class="waves-effect waves-dark" href="{!! url('items') !!}" aria-expanded="false">
                 <i class="mdi mdi-cart"></i>
                 <span class="hide-menu">{{trans('lang.item_plural')}}</span>
-            </a>
+        </a>
 
         </li>
         @endif
+        
 
         @if(in_array('item-attribute', $role_has_permission) || in_array('review-attribute', $role_has_permission))
 
@@ -250,7 +242,8 @@ $role_has_permission = App\Models\Permission::where('role_id', $user->role_id)->
             </a>
         </li>
         @endif
-        @if(in_array('general-notifications', $role_has_permission) || in_array('dynamic-notifications', $role_has_permission))
+        @if(in_array('general-notifications', $role_has_permission) || in_array('dynamic-notifications',
+        $role_has_permission))
 
         <li>
             <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false">
@@ -272,11 +265,13 @@ $role_has_permission = App\Models\Permission::where('role_id', $user->role_id)->
 
         </li>
         @endif
-        
+
 
         @if(
-        in_array('payments', $role_has_permission) || in_array('store-payouts', $role_has_permission) || in_array('driver-payments', $role_has_permission)
-        || in_array('driver-payouts', $role_has_permission) || in_array('wallet-transaction', $role_has_permission) || in_array('payout-request', $role_has_permission)
+        in_array('payments', $role_has_permission) || in_array('store-payouts', $role_has_permission) ||
+        in_array('driver-payments', $role_has_permission)
+        || in_array('driver-payouts', $role_has_permission) || in_array('wallet-transaction', $role_has_permission) ||
+        in_array('payout-request', $role_has_permission)
         )
 
         <li><a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false">
@@ -353,12 +348,16 @@ $role_has_permission = App\Models\Permission::where('role_id', $user->role_id)->
                 <span class="hide-menu">{{trans('lang.email_templates')}}</span>
             </a>
         </li>
-        @endif
---}}
-        @if(in_array('global-setting', $role_has_permission) || in_array('currency', $role_has_permission) || in_array('payment-method', $role_has_permission)
-        || in_array('admin-commission', $role_has_permission) || in_array('radius', $role_has_permission) || in_array('tax', $role_has_permission) || in_array('delivery-charge', $role_has_permission) || in_array('language', $role_has_permission)
-        || in_array('special-offer', $role_has_permission) || in_array('terms', $role_has_permission) || in_array('privacy', $role_has_permission)
-        || in_array('home-page', $role_has_permission) || in_array('footer', $role_has_permission) || in_array('document-verification', $role_has_permission))
+        @endif        
+        @if(in_array('global-setting', $role_has_permission) || in_array('currency', $role_has_permission) ||
+        in_array('payment-method', $role_has_permission)
+        || in_array('admin-commission', $role_has_permission) || in_array('radius', $role_has_permission) ||
+        in_array('tax', $role_has_permission) || in_array('delivery-charge', $role_has_permission) ||
+        in_array('language', $role_has_permission)
+        || in_array('special-offer', $role_has_permission) || in_array('terms', $role_has_permission) ||
+        in_array('privacy', $role_has_permission)
+        || in_array('home-page', $role_has_permission) || in_array('footer', $role_has_permission) ||
+        in_array('document-verification', $role_has_permission))
 
 
         <li><a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false">
@@ -400,7 +399,9 @@ $role_has_permission = App\Models\Permission::where('role_id', $user->role_id)->
                 <li><a href="{!! url('settings/app/deliveryCharge') !!}">{{trans('lang.deliveryCharge')}}</a></li>
                 @endif
                 @if(in_array('document-verification', $role_has_permission))
-                <li><a href="{!! url('settings/app/documentVerification') !!}">{{trans('lang.document_verification')}}</a></li>
+                <li><a
+                        href="{!! url('settings/app/documentVerification') !!}">{{trans('lang.document_verification')}}</a>
+                </li>
                 @endif
                 @if(in_array('language', $role_has_permission))
                 <li><a href="{!! url('settings/app/languages') !!}">{{trans('lang.languages')}}</a></li>
@@ -429,9 +430,9 @@ $role_has_permission = App\Models\Permission::where('role_id', $user->role_id)->
 
         </li>
         @endif
-
+        --}}
     </ul>
 
-    <p class="web_version"></p>
+    <p class="web_version"> Version: 1.0</p>
 
 </nav>

@@ -12421,3 +12421,19 @@ span.remove-menu-btn {
 .address .transactions-list-view,.address .transactions-list-view .transactions-list,.address .transactions-list-view .transactions-list .transactions-list-left{height: 100%;}
 
 .address .transactions-list-view .date{margin-bottom: 20px;min-height: 40px;}
+
+.tabla-ikam {    
+    text-align: center;
+    word-wrap: break-word;
+    word-break: break-word;
+    white-space: normal;
+    width: 50px;
+}
+
+.tabla-ikam td {
+    width: 50px; /* Ajusta según tus necesidades */
+    max-width: 50px;
+    overflow: hidden; /* Asegura que el contenido no se desborde */
+    text-overflow: ellipsis; /* Muestra "..." si el texto es demasiado largo */
+    white-space: nowrap; /* Evita saltos de línea */
+}

@@ -18,7 +18,7 @@
 
 
 
-            <h3 class="text-themecolor">{{trans('lang.store_plural')}}</h3>
+            <h3 class="text-themecolor">Pymes</h3>
 
 
 
@@ -34,15 +34,15 @@
 
 
 
-                <li class="breadcrumb-item"><a href="{{url('/dashboard')}}">{{trans('lang.dashboard')}}</a></li>
+                <li class="breadcrumb-item"><a href="{{url('/dashboard')}}">Dashboard</a></li>
 
 
 
-                <li class="breadcrumb-item">{{trans('lang.store_plural')}}</li>
+                <li class="breadcrumb-item">Pymes</li>
 
 
 
-                <li class="breadcrumb-item active">{{trans('lang.store_table')}}</li>
+                <li class="breadcrumb-item active">Lista de Pymes</li>
 
 
 
@@ -90,7 +90,7 @@
 
                                 <a class="nav-link active" href="{!! url()->current() !!}"><i
 
-                                        class="fa fa-list mr-2"></i>{{trans('lang.stores_table')}}</a>
+                                        class="fa fa-list mr-2"></i>Pymes</a>
 
                             </li>
 
@@ -98,7 +98,7 @@
 
                                 <a class="nav-link" href="{!! route('stores.create') !!}"><i
 
-                                        class="fa fa-plus mr-2"></i>{{trans('lang.create_store')}}</a>
+                                        class="fa fa-plus mr-2"></i>Nueva Pyme</a>
 
                             </li>
 
@@ -114,7 +114,7 @@
 
                         <div id="data-table_processing" class="dataTables_processing panel panel-default"
 
-                            style="display: none;">{{trans('lang.processing')}}
+                            style="display: none;">Cargando...
 
                         </div>
 
@@ -132,14 +132,8 @@
 
                                 cellspacing="0" width="100%">
 
-
-
                                 <thead>
-
-
-
                                     <tr>
-
                                         <?php if (in_array('store.delete', json_decode(@session('user_permissions'), true))) { ?>
 
                                             <th class="delete-all"><input type="checkbox" id="is_active"><label
@@ -148,323 +142,141 @@
 
                                                         class="do_not_delete" href="javascript:void(0)"><i
 
-                                                            class="fa fa-trash"></i> {{trans('lang.all')}}</a></label>
+                                                            class="fa fa-trash"></i>Todas</a></label>
 
                                             </th>
-
                                         <?php } ?>
 
-
-
-                                        <th>{{trans('lang.store_image')}}</th>
-
-
-
-                                        <th>{{trans('lang.store_name')}}</th>
-
-
-
-
-
-                                        <th>{{trans('lang.store_phone')}}</th>
-
-                                        <th>{{trans('lang.date')}}</th>
-
-
-
-                                        <!-- <th>{{trans('lang.order_transactions')}}</th> -->
-
-
-
-                                        <th>{{trans('lang.wallet_history')}}</th>
-
-
-
-                                        <th>{{trans('lang.item_plural')}}</th>
-
-                                        <th>{{trans('lang.order_plural')}}</th>
-
-
-
-                                        <th>{{trans('lang.actions')}}</th>
-
-
-
+                                        <th>Imagen</th>
+                                        <th>Nombre</th>
+                                        <th>Telefono</th>
+                                        <th>Dirección</th>                                        
+                                        <th>Descripción</th>
+                                        <th>Horario de apertura</th>
+                                        <th>Horario de Cierre</th>
+                                        <th>Operaciones</th>
                                     </tr>
-
-
-
                                 </thead>
-
-
-
-                                <tbody id="append_restaurants">
-
-
-
-
-
+                                <tbody id="append_restaurants" class="tabla-ikam">
                                 </tbody>
-
-
-
                             </table>
-
-
-
                         </div>
-
-
-
                         <!-- Popup -->
-
-
-
                         <div class="modal fade" id="create_vendor" tabindex="-1" role="dialog" aria-hidden="true">
-
                             <div class="modal-dialog modal-dialog-centered notification-main" role="document">
-
                                 <div class="modal-content">
-
                                     <div class="modal-header">
-
                                         <h5 class="modal-title" id="exampleModalLongTitle">{{trans('lang.copy_vendor')}}
-
                                             <span id="vendor_title_lable"></span>
-
                                         </h5>
-
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-
                                             <span aria-hidden="true">&times;</span>
-
                                         </button>
-
                                     </div>
-
                                     <div class="modal-body">
-
                                         <div id="data-table_processing"
-
                                             class="dataTables_processing panel panel-default" style="display: none;">
-
                                             {{trans('lang.processing')}}
-
                                         </div>
-
                                         <div class="error_top"></div>
-
                                         <!-- Form -->
-
                                         <div class="form-row">
-
                                             <div class="col-md-12 form-group">
-
                                                 <label class="form-label">{{trans('lang.first_name')}}</label>
-
                                                 <div class="input-group">
-
                                                     <input placeholder="Name" type="text" id="user_name"
-
                                                         class="form-control">
-
                                                 </div>
-
                                             </div>
-
                                             <div class="col-md-12 form-group">
-
                                                 <label class="form-label">{{trans('lang.last_name')}}</label>
-
                                                 <div class="input-group">
-
                                                     <input placeholder="Name" type="text" id="user_last_name"
-
                                                         class="form-control">
-
                                                 </div>
-
                                             </div>
-
                                             <div class="col-md-12 form-group">
-
                                                 <label class="form-label">{{trans('lang.vendor_title')}}</label>
-
                                                 <div class="input-group">
-
                                                     <input placeholder="Vendor Title" type="text" id="vendor_title"
-
                                                         class="form-control">
-
                                                 </div>
-
                                             </div>
-
                                             <div class="col-md-12 form-group"><label
-
                                                     class="form-label">{{trans('lang.email')}}</label><input
-
                                                     placeholder="Email" value="" id="user_email" type="text"
-
                                                     class="form-control"></div>
-
                                             <div class="col-md-12 form-group"><label
-
                                                     class="form-label">{{trans('lang.password')}}</label><input
-
                                                     placeholder="Password" id="user_password" type="password"
-
                                                     class="form-control">
-
                                             </div>
-
-
-
                                         </div>
-
                                         <!-- Form -->
-
                                     </div>
-
                                     <div class="modal-footer">
-
                                         <button type="button" class="btn btn-primary save-form-btn"
-
                                             >{{trans('lang.create')}}
-
                                         </button>
-
                                     </div>
-
                                 </div>
-
                             </div>
-
                         </div>
-
-
-
                         <!-- Popup -->
-
-
-
-
-
                     </div>
-
-
-
                 </div>
-
-
-
             </div>
-
-
-
         </div>
-
-
-
     </div>
-
-
-
 </div>
-
-
 
 @endsection
 
-
-
 @section('scripts')
 
-
-
 <script type="text/javascript">
-
-
-
     var database = firebase.firestore();
-
-    var refData = database.collection('vendors');
-
-    var ref = refData.orderBy('createdAt', 'desc');
-
+    var refData = database.collection('pyme');
+    var ref = refData.orderBy('nombre_pyme', 'desc');
     var append_list = '';
-
-
-
     var placeholderImage = '';
-
-
-
     var user_permissions = '<?php echo @session("user_permissions") ?>';
-
     user_permissions = Object.values(JSON.parse(user_permissions));
-
     var checkDeletePermission = false;
-
     if ($.inArray('store.delete', user_permissions) >= 0) {
-
         checkDeletePermission = true;
-
     }
 
 
-
     var userData = [];
-
     var vendorData = [];
-
     var vendorProducts = [];
 
-
+    /*
 
     var placeholder = database.collection('settings').doc('placeHolderImage');
 
-
-
     placeholder.get().then(async function (snapshotsimage) {
-
         var placeholderImageData = snapshotsimage.data();
-
         placeholderImage = placeholderImageData.image;
-
     })
+    */
 
     $(document).ready(function () {
 
-
-
         jQuery("#data-table_processing").show();
-
-
-
         const table = $('#storeTable').DataTable({
-
             pageLength: 10, // Number of rows per page
-
             processing: false, // Show processing indicator
-
             serverSide: true, // Enable server-side processing
-
             responsive: true,
-
             ajax: async function (data, callback, settings) {
-
                 const start = data.start;
-
                 const length = data.length;
-
                 const searchValue = data.search.value.toLowerCase();
-
                 const orderColumnIndex = data.order[0].column;
-
                 const orderDirection = data.order[0].dir;
-
-                const orderableColumns = (checkDeletePermission) ? ['', '', 'title', 'phone', 'createdAt', '', 'foods', 'orders', ''] : ['', 'title', 'phone', 'createdAt', '', 'foods', 'orders', '']; // Ensure this matches the actual column names
+                const orderableColumns = (checkDeletePermission) ? ['', '', 'title', 'phone', 'createdAt', '', 'foods', 'orders', ''] : ['', 'title', 'phone', 'createdAt', '', 'foods', 'orders', ''];
 
                 const orderByField = orderableColumns[orderColumnIndex]; // Adjust the index to match your table
 
@@ -475,135 +287,38 @@
                 }
 
                 await ref.get().then(async function (querySnapshot) {
-
                     if (querySnapshot.empty) {
-
                         console.error("No data found in Firestore.");
-
                         $('#data-table_processing').hide(); // Hide loader
-
                         callback({
-
                             draw: data.draw,
-
                             recordsTotal: 0,
-
                             recordsFiltered: 0,
-
                             data: [] // No data
-
                         });
-
                         return;
-
                     }
 
-
-
                     let records = [];
-
                     let filteredRecords = [];
 
-
-
                     await Promise.all(querySnapshot.docs.map(async (doc) => {
-
                         let childData = doc.data();
-
-                        childData.phone = (childData.phonenumber != '' && childData.phonenumber != null && childData.phonenumber.slice(0, 1) == '+') ? childData.phonenumber.slice(1) : childData.phonenumber;
-
-
-
-                        childData.id = doc.id; // Ensure the document ID is included in the data              
-
-                        if (childData.id) {
-
-                            childData.orders = await getTotalOrders(childData.id);
-
-                            childData.foods = await getTotalProduct(childData.id);
-
-                        } else {
-
-                            childData.orders = 0;
-
-                            childData.foods = 0;
-
-
-
-                        }
-
-                        if (searchValue) {
-
-                            var date = '';
-
-                            var time = '';
-
-                            if (childData.hasOwnProperty("createdAt")) {
-
-                                try {
-
-                                    date = childData.createdAt.toDate().toDateString();
-
-                                    time = childData.createdAt.toDate().toLocaleTimeString('en-US');
-
-                                } catch (err) {
-
-                                }
-
-                            }
-
-                            var createdAt = date + ' ' + time;
-
-
-
-                            if (
-
-                                (childData.title && childData.title.toLowerCase().toString().includes(searchValue)) ||
-
-                                (createdAt && createdAt.toString().toLowerCase().indexOf(searchValue) > -1) ||
-
-                                (childData.email && childData.email.toLowerCase().toString().includes(searchValue)) ||
-
-                                (childData.phoneNumber && childData.phoneNumber.toString().includes(searchValue))
-
-
-
-                            ) {
-
-                                filteredRecords.push(childData);
-
-                            }
-
-                        } else {
-
-                            filteredRecords.push(childData);
-
-                        }
-
+                        childData.id = doc.id;
+                        filteredRecords.push(childData);
                     }));
 
-
-
                     filteredRecords.sort((a, b) => {
-
                         let aValue = a[orderByField] ? a[orderByField].toString().toLowerCase() : '';
-
                         let bValue = b[orderByField] ? b[orderByField].toString().toLowerCase() : '';
 
                         if (orderByField === 'createdAt') {
-
                             try {
-
                                 aValue = a[orderByField] ? new Date(a[orderByField].toDate()).getTime() : 0;
-
                                 bValue = b[orderByField] ? new Date(b[orderByField].toDate()).getTime() : 0;
-
                             } catch (err) {
 
-
-
                             }
-
                         }
 
                         if (orderByField === 'foods') {
@@ -638,22 +353,14 @@
 
                     });
 
-
-
                     const totalRecords = filteredRecords.length;
-
-
-
                     const paginatedRecords = filteredRecords.slice(start, start + length);
 
-
-
                     await Promise.all(paginatedRecords.map(async (childData) => {
-
                         var getData = await buildHTML(childData);
-
+                        console.log("Aqui va el Data: " + data.draw);
+                        
                         records.push(getData);
-
                     }));
 
 
@@ -779,12 +486,8 @@
 
 
     async function buildHTML(val) {
-
-
-
-        var html = [];
-        
-        if(val.title != " " || val.title != "null" || val.title != null ){
+        var html = [];        
+        if(val.nombre_pyme != " " || val.nombre_pyme != "null" || val.nombre_pyme != null ){
             var id = val.id;
             var vendorUserId = val.author;
 
@@ -798,16 +501,16 @@
                     'for="is_open_' + id + '" ></label></td>');
             }
 
-            if (val.photo != '' && val.photo != null) {
-                html.push('<img onerror="this.onerror=null;this.src=\'' + placeholderImage + '\'" alt="" width="100%" style="width:70px;height:70px;" src="' + val.photo + '" alt="image">');
+            if (val.imagen1 != '' && val.imagen1 != null) {
+                html.push('<img onerror="this.onerror=null;this.src=\'' + placeholderImage + '\'" alt="" width="100%" style="width:70px;height:70px;" src="' + val.imagen1 + '" alt="image">');
 
             } else {
 
                 html.push('<img alt="" width="100%" style="width:70px;height:70px;" src="' + placeholderImage + '" alt="image">');
             }
 
-            if(val.title != null && val.title != ""){
-                html.push('<a href="' + route_view + '">' + val.title + '</a>');
+            if(val.nombre_pyme != null && val.nombre_pyme != ""){
+                html.push('<a href="' + route_view + '">' + val.nombre_pyme + '</a>');
             }
             else
             {
@@ -815,46 +518,44 @@
             }
             
 
-            if (val.hasOwnProperty('phonenumber') && val.phonenumber != null && val.phonenumber != "") {
-                html.push(shortEditNumber(val.phonenumber));
+            if (val.num_cel != null && val.num_cel != "") {
+                html.push(shortEditNumber(val.num_cel));
+            } else {
+                html.push('');
+            }
+            
+            if (val.direccion != null && val.direccion != "") {
+                html.push(val.direccion);                
             } else {
                 html.push('');
             }
 
-            var date = '';
-            var time = '';
-            if (val.hasOwnProperty("createdAt")) {
-                try {
-                    date = val.createdAt.toDate().toDateString();
-                    time = val.createdAt.toDate().toLocaleTimeString('en-US');
-                } catch (err) {
-
-                }
-                html.push('<span class="dt-time">' + date + ' ' + time + '</span>');
+            if (val.descripcion != null && val.descripcion != "") {
+                html.push(val.descripcion);
             } else {
                 html.push('');
             }
 
-            var payoutRequests = '{{route("users.walletstransaction",":id")}}';
-            payoutRequests = payoutRequests.replace(':id', val.author);
+            if (val.horario_apertura != null && val.horario_apertura != "") {
+                html.push(val.horario_apertura);
+            } else {
+                html.push('');
+            }
 
-            html.push('<a href="' + payoutRequests + '">{{trans("lang.wallet_history")}}</a>');
+            if (val.horario_cierre != null && val.horario_cierre != "") {
+                html.push(val.horario_cierre);
+            } else {
+                html.push('');
+            }
 
-            var active = val.isActive;
-            var vendorId = val.id;
-            var url = '{{route("stores.items",":id")}}';
-            url = url.replace(":id", vendorId);
-            html.push('<a href = "' + url + '">' + val.foods + '</a>');
-
-            var url2 = '{{route("stores.orders",":id")}}';
-            url2 = url2.replace(":id", vendorId);
-            html.push('<a href="' + url2 + '">' + val.orders + '</a>');
+            
             var actionHtml = '';
             actionHtml += '<span class="action-btn"><a href="javascript:void(0)" vendor_id="' + val.id + '" author="' + val.author + '" name="vendor-clone"><i class="fa fa-clone"></i></a><a href="' + route_view + '"><i class="fa fa-eye"></i></a><a href="' + route1 + '"><i class="fa fa-edit"></i></a>';
             if (checkDeletePermission) {
                 actionHtml += '<a id="' + val.id + '" author="' + val.author + '" name="vendor-delete" class="delete-btn" href="javascript:void(0)"><i class="fa fa-trash"></i></a></span>';
             }
             html.push(actionHtml);
+
             return html;
         }
        
@@ -907,15 +608,11 @@
 
 
     $("#is_active").click(function () {
-
         $("#storeTable .is_open").prop('checked', $(this).prop('checked'));
-
-
-
     });
 
 
-
+    /*
     $("#deleteAll").click(function () {
 
         if ($('#storeTable .is_open:checked').length) {
@@ -971,6 +668,7 @@
         }
 
     });
+    */
 
 
 
@@ -985,7 +683,7 @@
     });
 
 
-
+    /*
     $(document).on("click", "a[name='vendor-delete']", function (e) {
 
         var id = this.id;
@@ -1013,7 +711,11 @@
         }
 
     });
+    /*
 
+
+    // Borrar pyme con todos los elementos
+    /*
     async function deleteStoreData(storeId) {
 
         await database.collection('users').where('vendorID', '==', storeId).get().then(async function (userssanpshots) {
@@ -1237,9 +939,10 @@
         });
 
     }
+        */
 
 
-
+    /*
     $(document).on("click", "a[name='vendor-clone']", async function (e) {
 
 
@@ -1289,11 +992,12 @@
         }
 
     });
+    */
 
 
 
 
-
+    /*
     $(document).on("click", ".save-form-btn", async function (e) {
 
         var vendor_id = database.collection("tmp").doc().id;
@@ -1495,6 +1199,7 @@
         }
 
     });
+    */
 
 
 
