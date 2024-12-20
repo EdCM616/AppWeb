@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('content')
+
 <div class="page-wrapper">
     <div class="row page-titles">
         <div class="col-md-5 align-self-center">
@@ -12,6 +13,7 @@
                 <li class="breadcrumb-item active">Agregar</li>
             </ol>
         </div>
+        <label class="col-12 control-label">{{ $user->name  }} </label>                                
         <div> 
             <div class="card-body">
                 <div id="data-table_processing" class="dataTables_processing panel panel-default" style="display: none;">{{trans('lang.processing')}}
@@ -19,8 +21,8 @@
                 <div class="error_top"></div>
                 <div class="row restaurant_payout_create">
                     <div class="restaurant_payout_create-inner">                        
-                        <fieldset>
-                            <legend>Datos Generales de la Pyme</legend>
+                        <fieldset>                            
+                            <legend>Datos Generales de la Pyme</legend>                            
                             <div class="form-group row width-50">
                                 <label class="col-3 control-label">Nombre</label>
                                 <div class="col-7">
@@ -459,6 +461,8 @@
     var storageRef = firebase.storage().ref('pymes');
     var storyRef = firebase.storage().ref('videos');    
 
+    var userRef = "<?php echo $user->name; ?>"    
+
     $(document).ready(async function() {
         jQuery("#data-table_processing").show();
         /*
@@ -542,10 +546,8 @@
         var descripcion = $("#pyme_descripcion").val();
         var url_facebook = $("#pyme_facebook").val();
         var url_instagram = $("#pyme_instagram").val();
-        var url_tiktok = $("#pyme_tiktok").val();       
-        var userRef = $("#pyme_nombre").val();
-        var createdAT = createdAt;    
-        var user_id = "<?php echo uniqid(); ?>";      
+        var url_tiktok = $("#pyme_tiktok").val();               
+        var createdAT = createdAt;                
 
         if (nombre_pyme == "") {
             $(".error_top").show();
@@ -626,7 +628,8 @@
             url_facebook:url_facebook,
             url_instagram: url_instagram,
             url_tiktok: url_tiktok, 
-            video: videoPush,                   
+            video: videoPush,      
+            userRef: userRef,             
             createdAT: createdAT
         };     
         

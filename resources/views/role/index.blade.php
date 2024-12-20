@@ -9,15 +9,15 @@
 
         <div class="col-md-5 align-self-center">
 
-            <h3 class="text-themecolor restaurantTitle">{{trans('lang.role_plural')}}</h3>
+            <h3 class="text-themecolor restaurantTitle">Roles</h3>
 
         </div>
 
         <div class="col-md-7 align-self-center">
 
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{url('/dashboard')}}">{{trans('lang.dashboard')}}</a></li>
-                <li class="breadcrumb-item active">{{trans('lang.role_plural')}}</li>
+                <li class="breadcrumb-item"><a href="{{url('/dashboard')}}">Dashboard</a></li>
+                <li class="breadcrumb-item active">Roles</li>
             </ol>
 
         </div>
@@ -40,11 +40,11 @@
                         <ul class="nav nav-tabs align-items-end card-header-tabs w-100">
                             <li class="nav-item">
                                 <a class="nav-link active" href="{!! url()->current() !!}"><i
-                                        class="fa fa-list mr-2"></i>{{trans('lang.role_table')}}</a>
+                                        class="fa fa-list mr-2"></i>Roles</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{!! route('role.save') !!}"><i
-                                        class="fa fa-plus mr-2"></i>{{trans('lang.create_role')}}</a>
+                                        class="fa fa-plus mr-2"></i>Nuevo rol</a>
                             </li>
 
                         </ul>

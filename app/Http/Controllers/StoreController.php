@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class StoreController extends Controller
 {
@@ -59,7 +60,8 @@ class StoreController extends Controller
     }
 
     public function create(){
-        return view('stores.create');
+        $user = Auth::user();
+        return view('stores.create', compact(['user']));        
     }
 
     public function DocumentList($id){

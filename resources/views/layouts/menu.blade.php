@@ -29,6 +29,8 @@ $role_has_permission = App\Models\Permission::where('role_id', $user->role_id)->
         </li>
         @endif
 
+        {{-- 
+
         @if(in_array('users', $role_has_permission))
         <li>
             <a class="waves-effect waves-dark" href="{!! url('users') !!}" aria-expanded="false">
@@ -41,6 +43,8 @@ $role_has_permission = App\Models\Permission::where('role_id', $user->role_id)->
         </li>
         @endif
 
+        --}}
+
         @if(in_array('category', $role_has_permission))
 
         <li><a class="waves-effect waves-dark" href="{!! url('categories') !!}" aria-expanded="false">
@@ -51,6 +55,31 @@ $role_has_permission = App\Models\Permission::where('role_id', $user->role_id)->
 
             </a>
         </li>        
+        @endif
+
+        @if(in_array('admins', $role_has_permission) || in_array('roles', $role_has_permission))
+
+        <li><a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false">
+
+                <i class="mdi mdi-lock-outline"></i>
+
+                <span class="hide-menu">Controles de acceso</span>
+
+            </a>
+
+            <ul aria-expanded="false" class="collapse">
+                @if(in_array('roles', $role_has_permission))
+                <li><a href="{!! url('role') !!}">Roles del personal</a></li>
+                @endif
+
+                @if(in_array('admins', $role_has_permission))
+                <li><a href="{!! url('admin-users') !!}">Administradores Ikam</a></li>
+                @endif
+
+            </ul>
+
+        </li>
+
         @endif
 
         {{--

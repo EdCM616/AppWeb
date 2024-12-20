@@ -8,14 +8,14 @@
 
         <div class="col-md-5 align-self-center">
 
-            <h3 class="text-themecolor">{{trans('lang.category_plural')}}</h3>
+            <h3 class="text-themecolor">Categorias</h3>
 
         </div>
 
         <div class="col-md-7 align-self-center">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{url('/dashboard')}}">{{trans('lang.dashboard')}}</a></li>
-                <li class="breadcrumb-item active">{{trans('lang.category_plural')}}</li>
+                <li class="breadcrumb-item"><a href="{{url('/dashboard')}}">Dashboard</a></li>
+                <li class="breadcrumb-item active">Categorias</li>
             </ol>
         </div>
 
@@ -37,11 +37,17 @@
                     <div class="card-header">
                         <ul class="nav nav-tabs align-items-end card-header-tabs w-100">
                             <li class="nav-item">
-                                <a class="nav-link active" href="{!! url()->current() !!}"><i class="fa fa-list mr-2"></i>{{trans('lang.category_table')}}</a>
+                                <a class="nav-link active" href="{!! url()->current() !!}"><i class="fa fa-list mr-2"></i>Categorias</a>
                             </li>
+                            {{--
                             <li class="nav-item" >
                                 <a class="nav-link" href="{!! route('categories.create') !!}"><i
-                                            class="fa fa-plus mr-2"></i>{{trans('lang.category_create')}}</a>
+                                            class="fa fa-plus mr-2"></i>Nueva Categoria</a>
+                            </li>
+                            --}}
+                            <li class="nav-item" >
+                                <a class="nav-link" href="#"><i
+                                            class="fa fa-plus mr-2"></i>Nueva Categoria</a>
                             </li>
                         </ul>
                     </div>
@@ -49,7 +55,7 @@
                     <div class="card-body">
 
                         <div id="data-table_processing" class="dataTables_processing panel panel-default"
-                             style="display: none;">Processing... IKAM User
+                             style="display: none;">Cargando las Categorias
                         </div>
 
                         <div class="table-responsive m-t-10">
