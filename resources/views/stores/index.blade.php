@@ -340,10 +340,16 @@
             }
             
             var actionHtml = '';
+            /*
             actionHtml += '<span class="action-btn"><a href="javascript:void(0)" vendor_id="' + val.id + '" author="' + val.author + '" name="vendor-clone"><i class="fa fa-clone"></i></a><a href="' + route_view + '"><i class="fa fa-eye"></i></a><a href="' + route1 + '"><i class="fa fa-edit"></i></a>';
             if (checkDeletePermission) {
                 actionHtml += '<a id="' + val.id + '" author="' + val.author + '" name="vendor-delete" class="delete-btn" href="javascript:void(0)"><i class="fa fa-trash"></i></a></span>';
             }
+                */
+            actionHtml += '<span class="action-btn"><a href="#" vendor_id="' + val.id + '" author="' + val.author + '" name="vendor-clone"><i class="fa fa-clone"></i></a><a href="#"><i class="fa fa-eye"></i></a><a href="#"><i class="fa fa-edit"></i></a>';
+            if (checkDeletePermission) {
+                actionHtml += '<a class="delete-btn" href="#"><i class="fa fa-trash"></i></a></span>';
+            }   
             html.push(actionHtml);
             return html;
         }
