@@ -454,6 +454,7 @@
     var story_thumbnail = '';
     var story_thumbnail_filename = '';
     var storyCount = 0;
+    var id_pyme = "<?php echo uniqid();?>";
     
 
     let subCategorias = [];
@@ -526,9 +527,6 @@
             );
         }
     });
-
-    var nombrePyme = $("#pyme_nombre").val();   
-    
     
     $(".save-form-btn").click(async function() {        
 
@@ -615,6 +613,7 @@
         }        
 
         const tiendaData = {
+            id: id_pyme,
             nombre_pyme: nombre_pyme,
             nombreCategoria: nombreCategoria,
             nombreSubcate: nombreSubcate,
@@ -642,7 +641,8 @@
                         tiendaData[`imagen${index + 1}`] = GalleryIMG[index];
                     }
                 })                                
-                await firebase.firestore().collection('pyme').add(tiendaData);
+                //await firebase.firestore().collection('pyme').add(tiendaData);
+                await firebase.firestore().collection('pyme').doc(id_pyme).set(tiendaData)
                 console.log('Datos de tienda guardados correctamente');
                 window.location.href = '{{ route("stores") }}';
             } catch (error) {

@@ -471,14 +471,20 @@
     var story_thumbnail = '';
     var story_thumbnail_filename = '';
     var story_thumbnail_oldfile = '';
-    var storevideoDuration = 0;
+    var storevideoDuration = 10000;
     var storyCount = 0;
 
     let subCategorias = [];
     var filenamepath = '';
+    var imagen1 = '';
+    var imagen2 = '';
+    var imagen3 = '';
+    var imagen4 = '';
+    var imagen5 = '';
 
     var storageRef = firebase.storage().ref('pymes');
-    var storyRef = firebase.storage().ref('videos');    
+    var storyRef = firebase.storage().ref('videos');  
+    var createdAt = firebase.firestore.FieldValue.serverTimestamp();  
 
     //var userRef = "< ?php echo $user->name; ?>" 
 
@@ -581,19 +587,47 @@
                 new_added_restaurant_photos_filename.splice(index, 1);
             }
         });
-
         
         jQuery("#data-table_processing").show();
+        database.collection('categoria').orderBy('nombreCat').get().then(async function(snapshots) {
+            snapshots.docs.forEach((listval) => {                
+                var data = listval.data();                
+                $('#pyme-categoria').append($("<option></option>")
+                    .attr("value", data.nombreCat)                    
+                    .text(data.nombreCat));
+            });
+        });
+
+        database.collection('subCategoria').orderBy('nombre').get().then(async function(snapshots) {
+            snapshots.docs.forEach((listval) => {
+                var data = listval.data();
+                subCategorias.push({
+                    nombre: data.nombre,
+                    categoria: data.categoria
+                });
+            })            
+        });
+        
+        database.collection('colonia').orderBy('nombreCol').get().then( async function(snapshots) {
+            snapshots.docs.forEach(element => {
+                var data = element.data()
+                $('#pyme_colonia').append($("<option></option>")
+                    .attr("value", data.nombreCol)                    
+                    .text(data.nombreCol));                
+            });
+            
+        })
+
         ref.get().then(async function(snapshots) {
             try {
                 var pyme = snapshots.docs[0].data();                
 
                 $("#pyme_nombre").val(pyme.nombre_pyme);
-                $("#pyme-categoria option:selected").val(pyme.nombreCategoria);
-                $("#pyme-Subcategoria option:selected").val(pyme.nombreSubcate);
+                $("#pyme-categoria").val(pyme.nombreCategoria);
+                $("#pyme-Subcategoria").val(pyme.nombreSubcate);
                 $("#pyme_cel").val(pyme.num_cel);
                 $("#pyme_tel").val(pyme.num_local);
-                $("#pyme_colonia option:selected").val(pyme.nomColonia);
+                $("#pyme_colonia").val(pyme.nomColonia);
                 $("#pyme_direccion").val(pyme.direccion);
                 $("#pyme_maps").val(pyme.url_maps);
                 $("#pyme_apertura").val(pyme.horario_apertura);
@@ -768,7 +802,7 @@
                 }
                 */
 
-               //restaurnt_photos = restaurant.photos;                              
+                //restaurnt_photos = restaurant.photos;
                 restaurnt_photos.push(pyme.imagen1);
                 restaurnt_photos.push(pyme.imagen2);
                 restaurnt_photos.push(pyme.imagen3);
@@ -777,8 +811,7 @@
                 var photos = '';
                 var menuCardPhotos = ''
 
-                restaurnt_photos.forEach((photo) => {
-                    console.log("Estamos aqui");                    
+                restaurnt_photos.forEach((photo) => {                                        
                     photocount++;
                     photos = photos + '<span class="image-item" id="photo_' + photocount + '"><span class="remove-btn" data-id="' + photocount + '" data-img="' + photo + '" data-status="old"><i class="fa fa-remove"></i></span><img width="100px" id="" height="auto" src="' + photo + '"></span>';
                 })
@@ -905,6 +938,26 @@
             jQuery("#data-table_processing").hide();
         })
 
+        $('#pyme-categoria').on('change', function() {
+            var selectedValue = $(this).val(); 
+
+            $('#pyme-Subcategoria').empty();        
+            if (selectedValue) {
+                subCategorias.forEach((data) => {                 
+                    if (data.categoria == selectedValue) {                        
+                        $('#pyme-Subcategoria').append($("<option></option>")
+                        .attr("value", data.nombre)                    
+                        .text(data.nombre));                                                            
+                    }
+                }); 
+            } else {            
+                $('#pyme-Subcategoria').append(
+                    $("<option></option>")
+                        .text("Selecciona una categoría")
+                );
+            }
+        });
+
         async function getRestaurantStory(restaurantId) {
             await database.collection('story').where('vendorID', '==', restaurantId).get().then(async function(snapshots) {
                 if (snapshots.docs.length > 0) {
@@ -944,6 +997,7 @@
             return $c;
         }
 
+        /*
         $(".edit-form-btn").click(async function() {
             var restaurantname = $(".restaurant_name").val();
             var cuisines = $("#restaurant_cuisines option:selected").val();
@@ -962,6 +1016,7 @@
             var zoneId = $('#zone option:selected').val();
             var zoneArea = $('#zone option:selected').data('area');
             var isInZone = false;
+
             if(zoneId && zoneArea){
                 isInZone = checkLocationInZone(zoneArea,longitude,latitude);
             }
@@ -1180,6 +1235,7 @@
                     'minimum_delivery_charges_within_km': minimum_delivery_charges_within_km
                 };
                 coordinates = new firebase.firestore.GeoPoint(latitude, longitude);
+
                 await storeStoryData().then(async (resStoryVid) => {
                     await storeImageData().then(async (IMG) => {
                         await storeGalleryImageData().then(async (GalleryIMG) => {
@@ -1274,6 +1330,69 @@
                     window.scrollTo(0, 0);
                 });
             }
+        })
+        */
+
+        $(".edit-form-btn").click(async function() {
+
+            var nombre_pyme = $("#pyme_nombre").val();
+            var nombreCategoria = $("#pyme-categoria option:selected").val();
+            var nombreSubcate = $("#pyme-Subcategoria option:selected").val();
+            var num_cel = $("#pyme_cel").val();
+            var num_local = $("#pyme_tel").val();
+            var nomColonia = $("#pyme_colonia option:selected").val();
+            var direccion = $("#pyme_direccion").val();
+            var url_maps = $("#pyme_maps").val();
+            var horario_apertura = $("#pyme_apertura").val();
+            var horario_cierre = $("#pyme_cierre").val();
+            var descripcion = $("#pyme_descripcion").val();
+            var url_facebook = $("#pyme_facebook").val();
+            var url_instagram = $("#pyme_instagram").val();
+            var url_tiktok = $("#pyme_tiktok").val();               
+            var createdAT = createdAt;                   
+                
+                await storeStoryData().then(async (resStoryVid) => {                    
+                        await storeGalleryImageData().then(async (GalleryIMG) => {
+                            for (let index = 0; index < GalleryIMG.length; index++) {
+                                imagen${index + 1} = GalleryIMG[index];
+                            }
+                            
+                            database.collection('pyme').doc(id).update({
+                                'id': id,
+                                'nombre_pyme': nombre_pyme,
+                                'nombreCategoria': nombreCategoria,
+                                'nombreSubcate': nombreSubcate,
+                                'num_cel': num_cel,
+                                'num_local': num_local,
+                                'nomColonia': nomColonia,
+                                'direccion': direccion,
+                                'url_maps': url_maps,
+                                'horario_apertura': horario_apertura,
+                                'horario_cierre': horario_cierre,
+                                'descripcion': descripcion,
+                                'url_facebook':url_facebook,
+                                'url_instagram': url_instagram,
+                                'url_tiktok': url_tiktok, 
+                                'video': resStoryVid,                                                                                
+                                'createdAT': createdAT
+                                }).then(function(result) {
+                                    jQuery("#data-table_processing").hide();
+                                    window.location.href = '{{ route("stores")}}';
+                                });                            
+                        }).catch(err => {
+                            jQuery("#data-table_processing").hide();
+                            $(".error_top").show();
+                            $(".error_top").html("");
+                            $(".error_top").append("<p>" + err + "</p>");
+                            window.scrollTo(0, 0);
+                        });                    
+                }).catch(err => {
+                    jQuery("#data-table_processing").hide();
+                    $(".error_top").show();
+                    $(".error_top").html("");
+                    $(".error_top").append("<p>" + err + "</p>");
+                    window.scrollTo(0, 0);
+                });
         })
     })
 
@@ -1595,8 +1714,7 @@
             const photoResults = await Promise.all(photoPromises);
             photoResults.sort((a, b) => a.index - b.index);
             uploadedPhoto = photoResults.map(photo => photo.downloadURL);
-            newPhoto = [...newPhoto, ...uploadedPhoto];
-     
+            newPhoto = [...newPhoto, ...uploadedPhoto];     
         }  
  
       
