@@ -454,6 +454,7 @@
     var story_thumbnail = '';
     var story_thumbnail_filename = '';
     var storyCount = 0;
+    
 
     let subCategorias = [];
     var filenamepath = '';

@@ -636,7 +636,7 @@ return [
 
 
 
-    'category_plural' => 'Categories',
+    'category_plural' => 'Categoría',
 
 
 
@@ -1448,7 +1448,7 @@ return [
 
 
 
-    'store_edit' => 'Edit Store',
+    'store_edit' => 'Editar PYME',
 
 
 
@@ -1556,7 +1556,7 @@ return [
 
 
 
-    'store_plural' => 'Stores',
+    'store_plural' => 'Pymes',
 
 
 
@@ -2084,7 +2084,7 @@ return [
 
 
 
-    'update' => "Update",
+    'update' => "Actualizar",
 
 
 
@@ -2172,7 +2172,7 @@ return [
 
 
 
-    'processing' => "Processing...",
+    'processing' => "Cargando...",
 
 
 
@@ -2780,7 +2780,7 @@ return [
 
 
 
-    'create' => 'Create',
+    'create' => 'Agregar',
 
 
 
@@ -3960,19 +3960,19 @@ return [
 
 
 
-    'view' => 'View',
+    'view' => 'Ver',
 
 
 
-    'list' => 'List',
+    'list' => 'Tablas',
 
 
 
-    'edit' => 'Edit',
+    'edit' => 'Editar',
 
 
 
-    'delete' => 'Delete',
+    'delete' => 'Eliminar',
 
 
 

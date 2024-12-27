@@ -5,15 +5,15 @@
 
         <div class="row page-titles">
             <div class="col-md-5 align-self-center">
-                <h3 class="text-themecolor">{{trans('lang.category_plural')}}</h3>
+                <h3 class="text-themecolor">Categoría</h3>
             </div>
 
             <div class="col-md-7 align-self-center">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{url('/dashboard')}}">{{trans('lang.dashboard')}}</a></li>
-                    <li class="breadcrumb-item"><a href="{!! route('categories') !!}">{{trans('lang.category_plural')}}</a>
+                    <li class="breadcrumb-item"><a href="{{url('/dashboard')}}">Dashboard</a></li>
+                    <li class="breadcrumb-item"><a href="{!! route('categories') !!}">Categoría</a>
                     </li>
-                    <li class="breadcrumb-item active">{{trans('lang.category_create')}}</li>
+                    <li class="breadcrumb-item active">Nueva Categoría</li>
                 </ol>
             </div>
         </div>
@@ -26,12 +26,8 @@
                         <ul class="nav nav-tabs align-items-end card-header-tabs w-100">
                             <li role="presentation" class="nav-item">
                                 <a href="#category_information" aria-controls="description" role="tab" data-toggle="tab"
-                                   class="nav-link active">{{trans('lang.category_information')}}</a>
-                            </li>
-                            <li role="presentation" class="nav-item">
-                                <a href="#review_attributes" aria-controls="review_attributes" role="tab" data-toggle="tab"
-                                   class="nav-link">{{trans('lang.reviewattribute_plural')}}</a>
-                            </li>
+                                   class="nav-link active">Informacion de la categoría</a>
+                            </li>                            
                         </ul>
                     </div>
 
@@ -39,7 +35,7 @@
 
                         <div id="data-table_processing" class="dataTables_processing panel panel-default"
                              style="display: none;">
-                            {{trans('lang.processing')}}
+                                Cargando...
                         </div>
                         <div class="error_top" style="display:none"></div>
                         <div class="row restaurant_payout_create" role="tabpanel">
@@ -47,35 +43,24 @@
                             <div class="restaurant_payout_create-inner tab-content">
                                 <div role="tabpanel" class="tab-pane active" id="category_information">
                                     <fieldset>
-                                        <legend>{{trans('lang.category_create')}}</legend>
+                                        <legend>Crear Categoría</legend>
                                         <div class="form-group row width-100">
-                                            <label class="col-3 control-label">{{trans('lang.category_name')}}</label>
+                                            <label class="col-3 control-label">Nombre</label>
                                             <div class="col-7">
                                                 <input type="text" class="form-control cat-name">
-                                                <div class="form-text text-muted">{{ trans("lang.category_name_help") }}
+                                                    <div class="form-text text-muted">Inserte el nombre de la categoria
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div>                                        
 
                                         <div class="form-group row width-100">
-                                            <label class="col-3 control-label ">{{trans('lang.category_description')}}</label>
-                                            <div class="col-7">
-                            <textarea rows="7" class="category_description form-control"
-                                      id="category_description"></textarea>
-                                                <div class="form-text text-muted">{{ trans("lang.category_description_help")
-                                                }}
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group row width-100">
-                                            <label class="col-3 control-label">{{trans('lang.category_image')}}</label>
+                                            <label class="col-3 control-label">Imagen</label>
                                             <div class="col-7">
                                                 <input type="file" id="category_image">
                                                 <div class="placeholder_img_thumb cat_image"></div>
                                                 <div id="uploding_image"></div>
-                                                <div class="form-text text-muted w-50">{{ trans("lang.category_image_help")
-                                                }}
+                                                <div class="form-text text-muted w-50">
+                                                    Carge la imagen que llevara la categoria
                                                 </div>
                                             </div>
                                         </div>
@@ -83,14 +68,8 @@
                                        <div class="form-check row width-100">
                                         <input type="checkbox" class="item_publish" id="item_publish">
                                         <label class="col-3 control-label"
-                                               for="item_publish">{{trans('lang.item_publish')}}</label>
-                                       </div>
-
-                                        <div class="form-check row width-100" id="show_in_home">
-                                            <input type="checkbox" id="show_in_homepage">
-                                            <label class="col-3 control-label" for="show_in_homepage">{{trans('lang.show_in_home')}}</label>
-                                            <div class="form-text text-muted w-50">{{trans('lang.show_in_home_desc')}}<span id="forsection"></span></div>
-                                        </div>
+                                               for="item_publish">Publicar la Categoría</label>
+                                       </div>                                        
 
                                     </fieldset>
                                 </div>
@@ -106,9 +85,9 @@
 
                     <div class="form-group col-12 text-center btm-btn">
                         <button type="button" class="btn btn-primary save-form-btn"><i class="fa fa-save"></i>
-                            {{trans('lang.save')}}
+                            Guardar
                         </button>
-                        <a href="{!! route('categories') !!}" class="btn btn-default"><i class="fa fa-undo"></i>{{trans('lang.cancel')}}</a>
+                        <a href="{!! route('categories') !!}" class="btn btn-default"><i class="fa fa-undo"></i>Cancelar</a>
                     </div>
 
                 </div>
@@ -124,19 +103,12 @@
 <script>
 
     var database = firebase.firestore();
-    var ref = database.collection('vendor_categories');
+    var ref = database.collection('categoria');
     var photo = "";
     var fileName='';
     var id_category = "<?php echo uniqid();?>";
     var category_length = 1;
-    var placeholderImage = '';
-    var placeholder = database.collection('settings').doc('placeHolderImage');
-    var ref_review_attributes = database.collection('review_attributes');
-
-    placeholder.get().then(async function (snapshotsimage) {
-        var placeholderImageData = snapshotsimage.data();
-        placeholderImage = placeholderImageData.image;
-    })
+    var placeholderImage = '';       
 
     $(document).ready(function () {
 
@@ -150,88 +122,44 @@
 
         $(".save-form-btn").click(async function () {
 
-            var title = $(".cat-name").val();
-            var description = $(".category_description").val();
-            var item_publish = $("#item_publish").is(":checked");
-            var show_in_homepage = $("#show_in_homepage").is(":checked");
-
-            var review_attributes = [];
-            $('#review_attributes input').each(function () {
-                if ($(this).is(':checked')) {
-                    review_attributes.push($(this).val());
-                }
-            });
+            var title = $(".cat-name").val();            
+            var item_publish = $("#item_publish").is(":checked");                        
 
             if (title == '') {
-
                 $(".error_top").show();
                 $(".error_top").html("");
                 $(".error_top").append("<p>{{trans('lang.enter_cat_title_error')}}</p>");
                 window.scrollTo(0, 0);
             } else {
-                var count_vendor_categories = 0;
-                    if (show_in_homepage) {
+                jQuery("#data-table_processing").show();
 
-                        await database.collection('vendor_categories').where('show_in_homepage', "==", true).get().then(async function (snapshots) {
-
-                    count_vendor_categories = snapshots.docs.length;
-
+                storeImageData().then(IMG => {
+                    database.collection('categoria').doc(id_category).set({                                                
+                        'id': id_category,                        
+                        'nombreCat': title,                        
+                        'imagenCat': IMG,                        
+                        'publish': item_publish,                        
+                    }).then(function (result) {
+                        jQuery("#data-table_processing").hide();
+                        window.location.href = '{{ route("categories")}}';
                     });
-                    }
-                    if (count_vendor_categories >= 5) {
-                alert("Already 5 categories are active for show in homepage..");
-                return false;
-            } else {
-				jQuery("#data-table_processing").show();
-
-              storeImageData().then(IMG => {
-                database.collection('vendor_categories').doc(id_category).set({
-                    'id': id_category,
-                    'title': title,
-                    'description': description,
-                    'photo': IMG,
-                    'review_attributes': review_attributes,
-                    'publish': item_publish,
-                    'show_in_homepage': show_in_homepage,
-                }).then(function (result) {
+                    }).catch(function (error) {
                     jQuery("#data-table_processing").hide();
-                    window.location.href = '{{ route("categories")}}';
-                });
-                }).catch(function (error) {
-				jQuery("#data-table_processing").hide();
-                $(".error_top").show();
-                $(".error_top").html("");
-                $(".error_top").append("<p>" + error + "</p>");
-            })
-
-             }
-            }
-
+                    $(".error_top").show();
+                    $(".error_top").html("");
+                    $(".error_top").append("<p>" + error + "</p>");
+                })
+            }  
         });
-
     });
 
-
-    ref_review_attributes.get().then(async function (snapshots) {
-        var ra_html = '';
-        snapshots.docs.forEach((listval) => {
-            var data = listval.data();
-            ra_html += '<div class="form-check width-100">';
-            ra_html += '<input type="checkbox" id="review_attribute_' + data.id + '" value="' + data.id + '">';
-            ra_html += '<label class="col-3 control-label" for="review_attribute_' + data.id + '">' + data.title + '</label>';
-            ra_html += '</div>';
-        });
-        $('#review_attributes').html(ra_html);
-    });
-
-
-    var storageRef = firebase.storage().ref('images');
+    var storageRef = firebase.storage().ref('categorias');
 
     async function storeImageData() {
         var newPhoto = '';
         try {
-            photo = photo.replace(/^data:image\/[a-z]+;base64,/, "")
-            var uploadTask = await storageRef.child(fileName).putString(photo, 'base64', {contentType: 'image/jpg'});
+            photo = photo.replace(/^data:image\/[a-z]+;base64,/, "");
+            var uploadTask = await storageRef.child(fileName).putString(photo, 'base64', {contentType: 'image/jpg'});            
             var downloadURL = await uploadTask.ref.getDownloadURL();
             newPhoto = downloadURL;
             photo = downloadURL;
@@ -239,16 +167,15 @@
             console.log("ERR ===", error);
         }
         return newPhoto;
-    }
+    }   
 
     function handleFileSelect(evt) {
-        
+
         var f = evt.target.files[0];
         var reader = new FileReader();
-        reader.onload = (function (theFile) {
-            
-            return function (e) {
+        reader.onload = (function (theFile) {            
 
+            return function (e) {
                 var filePayload = e.target.result;
                 var val = $('#category_image').val().toLowerCase();
                 var ext = val.split('.')[1];
@@ -274,12 +201,10 @@
         })(f);
         reader.readAsDataURL(f);
     }
-
-    //upload image with compression
+    
     $("#category_image").resizeImg({
         
-        callback: function(base64str) {
-            
+        callback: function(base64str) {            
             var val = $('#category_image').val().toLowerCase();
             var ext = val.split('.')[1];
             var docName = val.split('fakepath')[1];
@@ -289,7 +214,7 @@
             photo = base64str;
             fileName=filename;
             $(".cat_image").empty();
-            $(".cat_image").append('<img class="rounded" style="width:50px" src="' + photo + '" alt="image">');
+            $(".cat_image").append('<img class="rounded" style="width:150px; height:150px" src="' + photo + '" alt="image">');
             $("#category_image").val('');
         }
     });

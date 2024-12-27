@@ -5,14 +5,14 @@
         <div class="row page-titles">
 
             <div class="col-md-5 align-self-center">
-                <h3 class="text-themecolor">{{trans('lang.category_plural')}}</h3>
+                <h3 class="text-themecolor">Categoría</h3>
             </div>
             <div class="col-md-7 align-self-center">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{url('/dashboard')}}">{{trans('lang.dashboard')}}</a></li>
+                    <li class="breadcrumb-item"><a href="{{url('/dashboard')}}">Dashboard</a></li>
                     <li class="breadcrumb-item"><a
-                                href="{!! route('categories') !!}">{{trans('lang.category_plural')}}</a></li>
-                    <li class="breadcrumb-item active">{{trans('lang.category_edit')}}</li>
+                                href="{!! route('categories') !!}">Categoría</a></li>
+                    <li class="breadcrumb-item active">Editar categoría</li>
                 </ol>
             </div>
         </div>
@@ -25,50 +25,36 @@
                         <ul class="nav nav-tabs align-items-end card-header-tabs w-100">
                             <li role="presentation" class="nav-item">
                                 <a href="#category_information" aria-controls="description" role="tab" data-toggle="tab"
-                                   class="nav-link active">{{trans('lang.category_information')}}</a>
-                            </li>
-                            <li role="presentation" class="nav-item">
-                                <a href="#review_attributes" aria-controls="review_attributes" role="tab"
-                                   data-toggle="tab"
-                                   class="nav-link">{{trans('lang.reviewattribute_plural')}}</a>
-                            </li>
+                                    class="nav-link active">Informacion de la categoría</a>
+                            </li>                            
                         </ul>
                     </div>
                     <div class="card-body">
 
                         <div id="data-table_processing" class="dataTables_processing panel panel-default"
-                             style="display: none;">{{trans('lang.processing')}}</div>
+                             style="display: none;">Cargando</div>
                         <div class="error_top" style="display:none"></div>
                         <div class="row restaurant_payout_create" role="tabpanel">
 
                             <div class="restaurant_payout_create-inner tab-content">
                                 <div role="tabpanel" class="tab-pane active" id="category_information">
                                     <fieldset>
-                                        <legend>{{trans('lang.category_edit')}}</legend>
+                                        <legend>Editar Categoría</legend>
                                         <div class="form-group row width-100">
-                                            <label class="col-3 control-label">{{trans('lang.category_name')}}</label>
+                                            <label class="col-3 control-label">Nombre</label>
                                             <div class="col-7">
                                                 <input type="text" class="form-control cat-name">
-                                                <div class="form-text text-muted">{{ trans("lang.category_name_help") }} </div>
+                                                <div class="form-text text-muted">Modifique el nombre de la categoría</div>
                                             </div>
-                                        </div>
+                                        </div>                                       
 
                                         <div class="form-group row width-100">
-                                            <label class="col-3 control-label ">{{trans('lang.category_description')}}</label>
-                                            <div class="col-7">
-                                <textarea rows="7" class="category_description form-control"
-                                          id="category_description"></textarea>
-                                                <div class="form-text text-muted">{{ trans("lang.category_description_help") }}</div>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group row width-100">
-                                            <label class="col-3 control-label">{{trans('lang.category_image')}}</label>
+                                            <label class="col-3 control-label">Imagen</label>
                                             <div class="col-7">
                                                 <input type="file" id="category_image">
                                                 <div class="placeholder_img_thumb cat_image"></div>
                                                 <div id="uploding_image"></div>
-                                                <div class="form-text text-muted w-50">{{ trans("lang.category_image_help") }}</div>
+                                                <div class="form-text text-muted w-50">Cambie la imagen de la categoría</div>
                                             </div>
                                         </div>
 
@@ -77,13 +63,6 @@
                                         <label class="col-3 control-label"
                                                for="item_publish">{{trans('lang.item_publish')}}</label>
                                        </div>
-
-                                        <div class="form-check row width-100" id="show_in_home">
-                                            <input type="checkbox" id="show_in_homepage">
-                                            <label class="col-3 control-label" for="show_in_homepage">{{trans('lang.show_in_home')}}</label>
-                                            <div class="form-text text-muted w-50">{{trans('lang.show_in_home_desc')}}<span id="forsection"></span></div>
-                                        </div>            
-                       
                                     </fieldset>
                                 </div>
 
@@ -97,9 +76,9 @@
                     </div>
                     <div class="form-group col-12 text-center btm-btn">
                         <button type="button" class="btn btn-primary edit-form-btn"><i
-                                    class="fa fa-save"></i> {{trans('lang.save')}}</button>
+                                    class="fa fa-save"></i> Guardar</button>
                         <a href="{!! route('categories') !!}" class="btn btn-default"><i
-                                    class="fa fa-undo"></i>{{trans('lang.cancel')}}</a>
+                                    class="fa fa-undo"></i>Cancelar</a>
                     </div>
 
                 </div>
@@ -116,112 +95,56 @@
     
     var id = "<?php echo $id;?>";
     var database = firebase.firestore();
-    var ref = database.collection('vendor_categories').where("id", "==", id);
+    var ref = database.collection('categoria').where("id", "==", id);    
     var photo = "";
     var fileName="";
     var catImageFile="";
     var placeholderImage = '';
-    var placeholder = database.collection('settings').doc('placeHolderImage');
-    var ref_review_attributes = database.collection('review_attributes');
     var category = '';
-    var storageRef = firebase.storage().ref('images');
-    var storage = firebase.storage();
-
-    placeholder.get().then(async function (snapshotsimage) {
-        var placeholderImageData = snapshotsimage.data();
-        placeholderImage = placeholderImageData.image;
-    })
+    var storageRef = firebase.storage().ref('categorias');
+    var storage = firebase.storage();    
 
     $(document).ready(function () {
 
         jQuery("#data-table_processing").show();
         ref.get().then(async function (snapshots) {
             category = snapshots.docs[0].data();
-            $(".cat-name").val(category.title);
-            $(".category_description").val(category.description);
+            $(".cat-name").val(category.nombreCat);           
 
-            if (category.photo != '' && category.photo != null) {
-                photo = category.photo;
-                catImageFile=category.photo;
-                $(".cat_image").append('<img onerror="this.onerror=null;this.src=\'' + placeholderImage + '\'" class="rounded" style="width:50px" src="' + photo + '" alt="image">');
+            if (category.imagenCat != '' && category.imagenCat != null) {
+                photo = category.imagenCat;
+                catImageFile=category.imagenCat;
+                $(".cat_image").append('<img onerror="this.onerror=null;this.src=\'' + placeholderImage + '\'" class="rounded" style="width:150px; height:150px" src="' + photo + '" alt="image">');
             } else {
 
-                $(".cat_image").append('<img class="rounded" style="width:50px" src="' + placeholderImage + '" alt="image">');
+                $(".cat_image").append('<img class="rounded" style="width:150px; height:150px" src="' + placeholderImage + '" alt="image">');
             }
 
             if (category.publish) {
                 $("#item_publish").prop('checked', true);
             }
-            
-            if (category.show_in_homepage) {
-                $("#show_in_homepage").prop('checked', true);
-            }
-
 
             jQuery("#data-table_processing").hide();
         })
 
-        ref_review_attributes.get().then(async function (snapshots) {
-            var ra_html = '';
-            snapshots.docs.forEach((listval) => {
-                var data = listval.data();
-                ra_html += '<div class="form-check width-100" >';
-                var checked = $.inArray(data.id, category.review_attributes) !== -1 ? 'checked' : '';
-                ra_html += '<input type="checkbox" id="review_attribute_' + data.id + '" value="' + data.id + '" ' + checked + '>';
-                ra_html += '<label class="col-3 control-label" for="review_attribute_' + data.id + '">' + data.title + '</label>';
-                ra_html += '</div>';
-            })
-            $('#review_attributes').html(ra_html);
-        })
-
-
         $(".edit-form-btn").click(async function () {
 
-            var title = $(".cat-name").val();
-            var description = $(".category_description").val();
-            var item_publish = $("#item_publish").is(":checked");
-            var show_in_homepage = $("#show_in_homepage").is(":checked");
-
-            var review_attributes = [];
-            $('#review_attributes input').each(function () {
-                if ($(this).is(':checked')) {
-                    review_attributes.push($(this).val());
-                }
-            });
+            var title = $(".cat-name").val();            
+            var item_publish = $("#item_publish").is(":checked");                        
 
             if (title == '') {
-
                 $(".error_top").show();
                 $(".error_top").html("");
                 $(".error_top").append("<p>{{trans('lang.enter_cat_title_error')}}</p>");
                 window.scrollTo(0, 0);
-            } else {
-
-                var count_vendor_categories = 0;
-                if (show_in_homepage) {
-
-                    await database.collection('vendor_categories').where('show_in_homepage', "==", true).where("id", "!=", id).get().then(async function (snapshots) {
-
-                        count_vendor_categories = snapshots.docs.length;
-
-                    });
-                }
-
-                if (count_vendor_categories >= 5) {
-                    alert("Already 5 categories are active for show in homepage..");
-                    return false;
-                    
-                } else {
-
+            } else {               
                 jQuery("#data-table_processing").show();
                 storeImageData().then(IMG => {
-                database.collection('vendor_categories').doc(id).update({
-                    'title': title,
-                    'description': description,
-                    'photo': IMG,
-                    'review_attributes': review_attributes,
-                    'publish': item_publish,
-                    'show_in_homepage': show_in_homepage,
+                database.collection('categoria').doc(id).update({
+                    'id': id,                        
+                    'nombreCat': title,                        
+                    'imagenCat': IMG,                        
+                    'publish': item_publish,                                
                 }).then(function (result) {
                     jQuery("#data-table_processing").hide();
                     window.location.href = '{{ route("categories")}}';
@@ -233,8 +156,6 @@
                     $(".error_top").append("<p>" + err + "</p>");
                     window.scrollTo(0, 0);
                 });
-
-            }
             }
 
         });
@@ -321,7 +242,7 @@
             photo=base64str;
             fileName=filename;
             $(".cat_image").empty();
-            $(".cat_image").append('<img class="rounded" style="width:50px" src="' + photo + '" alt="image">');
+            $(".cat_image").append('<img class="rounded" style="width:150px; height:150px" src="' + photo + '" alt="image">');
             $("#category_image").val('');
 
         }

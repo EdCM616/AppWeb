@@ -195,8 +195,17 @@
                     let filteredRecords = [];
                     await Promise.all(querySnapshot.docs.map(async (doc) => {
                         let childData = doc.data();
-                        childData.id = doc.id;
-                        filteredRecords.push(childData);
+                        childData.id = doc.id;                        
+                        if (searchValue) {
+                            if (
+                                (childData.nombre_pyme && childData.nombre_pyme.toString().toLowerCase().includes(searchValue)) ||
+                                (childData.totalProducts && childData.totalProducts.toString().includes(searchValue))
+                            ) {
+                                filteredRecords.push(childData);
+                            }
+                        } else {
+                            filteredRecords.push(childData);
+                        }
                     }));
                     filteredRecords.sort((a, b) => {
                         let aValue = a[orderByField] ? a[orderByField].toString().toLowerCase() : '';
@@ -346,7 +355,7 @@
                 actionHtml += '<a id="' + val.id + '" author="' + val.author + '" name="vendor-delete" class="delete-btn" href="javascript:void(0)"><i class="fa fa-trash"></i></a></span>';
             }
                 */
-            actionHtml += '<span class="action-btn"><a href="#" vendor_id="' + val.id + '" author="' + val.author + '" name="vendor-clone"><i class="fa fa-clone"></i></a><a href="#"><i class="fa fa-eye"></i></a><a href="#"><i class="fa fa-edit"></i></a>';
+            actionHtml += '<span class="action-btn"><a href="#" vendor_id="' + val.id + '" author="' + val.author + '" name="vendor-clone"><i class="fa fa-clone"></i></a><a href="#"><i class="fa fa-eye"></i></a><a href="' + route1 + '"><i class="fa fa-edit"></i></a>';
             if (checkDeletePermission) {
                 actionHtml += '<a class="delete-btn" href="#"><i class="fa fa-trash"></i></a></span>';
             }   
